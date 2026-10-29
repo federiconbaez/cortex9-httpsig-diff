@@ -84,6 +84,20 @@ Casos ambiguos que dividen: `T23` (body cambiado con `Content-Digest` firmado: a
 | Contar aceptaciones indebidas | **Cumplido**: tabla arriba |
 | Apéndice B pasa en todos | **No cumplido**: wimsey 4/5 (B.2.2) y aauth 3/5 (B.2.2, B.2.3). web-bot-auth 5/5 con la derivación de la referencia |
 
+### Qué prueba y qué no el 50/50, el 5/5 y los controles rechazados por las 4
+
+- **Prueba**:
+  - La referencia reproduce las 5 bases del Apéndice B.2. Es la única parte anclada fuera de nuestro corpus, porque los vectores son del RFC.
+  - La referencia coincide con los 50 veredictos que escribimos para los casos decididos.
+  - Las 4 implementaciones rechazan los dos controles negativos: firma alterada (`T20`) y otra clave (`T21`).
+- **No prueba**:
+  - Que la referencia sea correcta: el 50/50 compara la referencia contra veredictos escritos por el mismo autor desde la misma lectura del RFC.
+  - Que los crates rechacen alteraciones fuera de los 23 casos `T*`: los controles negativos son solo 2.
+  - Nada sobre el compromiso de la clave: quien tiene la clave Ed25519 firma requests válidos.
+  - Nada sobre el replay de un request firmado válido: `created`, `expires` y `nonce` no se hacen cumplir: los vectores llevan `created` de 2021 y se aceptan.
+  - Nada sobre respuestas, otros algoritmos ni el comportamiento de stacks HTTP reales.
+- **El corpus es nuestro**, salvo los vectores del Apéndice B.
+
 ### Nivel de verificación
 
 - **A**: compila, `clippy -D warnings` limpio, 9/9 tests (ninguno ignorado).
@@ -125,6 +139,16 @@ Casos ambiguos que dividen: `T23` (body cambiado con `Content-Digest` firmado: a
 **Notable:** aauth accepts a query whose `'` was percent-encoded after signing (T11, `url`-crate re-encoding), a path with added dot segments (T10, debatable under RFC 9110 §4.2.3, see the post-hoc note in the Spanish section), duplicate labels using the first (P01) and base64url signatures (P02); web-bot-auth and aauth ignore an `alg` parameter that contradicts the key (T16); wimsey and aauth accept a component covered twice (T18). aauth rejects Appendix B.2.3 only because its Content-Digest re-check knows SHA-256 alone.
 
 **Acceptance criterion "Appendix B passes in all": not met** (wimsey 4/5, aauth 3/5).
+
+**What 50/50, 5/5 and "rejected by all 4" prove and what they don't:**
+- **They prove** that the reference reproduces the 5 Appendix B.2 bases (the only part anchored outside our corpus) and matches the 50 verdicts we wrote, and that all four implementations reject an altered signature (`T20`) and another key (`T21`).
+- **They don't prove** that the reference is correct: 50/50 is agreement with verdicts written by the same author.
+- **They don't cover**:
+  - alterations outside the 23 `T*` cases (only 2 negative controls);
+  - key compromise;
+  - replay of a valid signed request (`created`, `expires` and `nonce` are not enforced; the vectors carry a 2021 `created` and are accepted);
+  - responses, other algorithms and real HTTP stacks.
+- **The corpus is ours**, except Appendix B.
 
 **Verification level: B.** Limits: requests only, Ed25519 only, no structured-field component parameters, B.2.1–B.2.5 checked by re-signing the RFC base with Ed25519, findings not reported upstream.
 
