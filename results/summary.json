@@ -1,0 +1,131 @@
+{
+  "by_category": {
+    "appendix_b": 5,
+    "parser": 7,
+    "tampered": 23,
+    "valid": 21
+  },
+  "cases": 56,
+  "divergent": [
+    "B.2.2",
+    "B.2.3",
+    "V03-ows-trimmed",
+    "V04-query-absent",
+    "V08-authority-default-port",
+    "V10-target-uri",
+    "V11-request-target",
+    "V12-scheme",
+    "V13-query-param-encoding",
+    "V14-query-subdelim",
+    "V15-input-reformatted",
+    "V21-digest-sha512",
+    "T10-path-dotseg-prefix",
+    "T11-query-pct-collapse",
+    "T16-alg-mismatch",
+    "T18-duplicate-component",
+    "T23-body-swap-digest-kept",
+    "P01-duplicate-label-last-wins",
+    "P02-signature-urlsafe-b64",
+    "P03-signer-noncanonical-params",
+    "P04-path-dotseg-raw",
+    "P05-path-dotseg-added",
+    "P07-uppercase-component"
+  ],
+  "divergent_cases": 23,
+  "per_implementation": {
+    "aauth-httpsig": {
+      "agree_with_rfc": 34,
+      "appendix_b_pass": 3,
+      "appendix_b_passed": [
+        "B.2.1",
+        "B.2.5",
+        "B.2.6"
+      ],
+      "decided_cases": 50,
+      "spurious_rejection_cases": [
+        "B.2.2",
+        "B.2.3",
+        "V03-ows-trimmed",
+        "V04-query-absent",
+        "V11-request-target",
+        "V13-query-param-encoding",
+        "V14-query-subdelim",
+        "V15-input-reformatted",
+        "V20-obs-fold",
+        "V21-digest-sha512"
+      ],
+      "spurious_rejections": 10,
+      "undue_acceptance_cases": [
+        "T10-path-dotseg-prefix",
+        "T11-query-pct-collapse",
+        "T16-alg-mismatch",
+        "T18-duplicate-component",
+        "P01-duplicate-label-last-wins",
+        "P02-signature-urlsafe-b64"
+      ],
+      "undue_acceptances": 6
+    },
+    "reference": {
+      "agree_with_rfc": 50,
+      "appendix_b_pass": 5,
+      "appendix_b_passed": [
+        "B.2.1",
+        "B.2.2",
+        "B.2.3",
+        "B.2.5",
+        "B.2.6"
+      ],
+      "decided_cases": 50,
+      "spurious_rejection_cases": [],
+      "spurious_rejections": 0,
+      "undue_acceptance_cases": [],
+      "undue_acceptances": 0
+    },
+    "web-bot-auth": {
+      "agree_with_rfc": 47,
+      "appendix_b_pass": 5,
+      "appendix_b_passed": [
+        "B.2.1",
+        "B.2.2",
+        "B.2.3",
+        "B.2.5",
+        "B.2.6"
+      ],
+      "decided_cases": 50,
+      "spurious_rejection_cases": [
+        "V03-ows-trimmed",
+        "V20-obs-fold"
+      ],
+      "spurious_rejections": 2,
+      "undue_acceptance_cases": [
+        "T16-alg-mismatch"
+      ],
+      "undue_acceptances": 1
+    },
+    "wimsey-httpsig": {
+      "agree_with_rfc": 42,
+      "appendix_b_pass": 4,
+      "appendix_b_passed": [
+        "B.2.1",
+        "B.2.3",
+        "B.2.5",
+        "B.2.6"
+      ],
+      "decided_cases": 50,
+      "spurious_rejection_cases": [
+        "B.2.2",
+        "V08-authority-default-port",
+        "V10-target-uri",
+        "V12-scheme",
+        "V13-query-param-encoding",
+        "V15-input-reformatted",
+        "V20-obs-fold"
+      ],
+      "spurious_rejections": 7,
+      "undue_acceptance_cases": [
+        "T18-duplicate-component"
+      ],
+      "undue_acceptances": 1
+    }
+  }
+}
